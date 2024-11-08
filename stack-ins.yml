@@ -10,10 +10,6 @@ services:
       PMA_HOST: mysql-db
       MYSQL_ROOT_PASSWORD: qwerty
       PMA_ARBITRARY: 1
-      PHP_UPLOAD_MAX_FILESIZE: 10M
-      PHP_MAX_INPUT_VARS: 5000
-      PMA_ABSOLUTE_URI: http://localhost:9090
-      PMA_ALLOW_HTTP: 1 
   
   # Servicio de MySQL
   mysql-db:
@@ -24,7 +20,7 @@ services:
       - 3306:3306
     volumes:
       - ./mysql_data:/var/lib/mysql
-      - ./dbfiles:/docker-entrypoint-initdb.d  # Asegúrate de que este directorio contenga el archivo SQL
+      - ./dbfiles:/docker-entrypoint-initdb.d 
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: BD_Sistema_BiBlioteca
@@ -32,16 +28,16 @@ services:
       MYSQL_PASSWORD: root
 
   # Servicio Front
-  sistema-ventas-front:
+  Sistema-BiBlioteca-Front:
     build:
       context: ./Sistema-BiBlioteca-Front
       dockerfile: Dockerfile
-    container_name: sistema-biblioteca-front
+    container_name: Sistema-BiBlioteca-Front
     ports:
       - 80:80
   
   # Servicio del Backend
-  sistema-ventas-back:
+  Sistema-BiBlioteca-Back:
     build:
       context: ./Sistema-BiBlioteca-Back
       dockerfile: Dockerfile
